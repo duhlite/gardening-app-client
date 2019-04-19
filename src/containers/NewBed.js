@@ -4,9 +4,9 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
-import "./NewNote.css";
+import "./NewBed.css";
 
-export default class NewNote extends Component {
+export default class NewBed extends Component {
   constructor(props) {
     super(props);
 
@@ -14,18 +14,20 @@ export default class NewNote extends Component {
 
     this.state = {
       isLoading: null,
-      content: ""
+      name: "",
+      lengthDimension: "",
+      widthDimension: ""
     };
   }
 
-  createNote(note) {
-    return API.post("notes", "/notes", {
-      body: note
+  createBed(bed) {
+    return API.post("dev-garden-api", "/garden", {
+      body: bed
     });
   }
 
   validateForm() {
-    return this.state.content.length > 0;
+    return this.state.name.length > 0;
   }
 
   handleChange = event => {
@@ -49,13 +51,10 @@ export default class NewNote extends Component {
     this.setState({ isLoading: true });
 
     try {
-      const attachment = this.file
-        ? await s3Upload(this.file)
-        : null;
-
-      await this.createNote({
-        attachment,
-        content: this.state.content
+      await this.createBed({
+        name: this.state.name,
+        lengthDimension: this.state.lengthDimension,
+        widthDimension: this.state.widthDimension
       });
       this.props.history.push("/");
     } catch (e) {
@@ -66,18 +65,28 @@ export default class NewNote extends Component {
 
   render() {
     return (
-      <div className="NewNote">
+      <div className="NewBed">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="content">
+          <FormGroup controlId="name">
             <FormControl
               onChange={this.handleChange}
-              value={this.state.content}
+              value={this.state.name}
               componentClass="textarea"
             />
           </FormGroup>
-          <FormGroup controlId="file">
-            <ControlLabel>Attachment</ControlLabel>
-            <FormControl onChange={this.handleFileChange} type="file" />
+          <FormGroup controlId="lengthDimension">
+            <FormControl
+              onChange={this.handleChange}
+              value={this.state.lengthDimension}
+              componentClass="textarea"
+            />
+          </FormGroup>
+          <FormGroup controlId="widthDimension">
+            <FormControl
+              onChange={this.handleChange}
+              value={this.state.widthDimension}
+              componentClass="textarea"
+            />
           </FormGroup>
           <LoaderButton
             block

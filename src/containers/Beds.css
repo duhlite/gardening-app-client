@@ -1,0 +1,8 @@
+.Beds form {
+  padding-bottom: 15px;
+}
+
+.Beds form textarea {
+  height: 100px;
+  font-size: 24px;
+}
