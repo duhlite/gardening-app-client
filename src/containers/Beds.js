@@ -128,34 +128,38 @@ export default class Beds extends Component {
     const bedPlants = [{}].concat(this.state.plants).map(
       (plant, i) =>
         i !== 0
-          ? <FormGroup
-              key={i}
-            >
-            <h4>Name</h4>
-            <FormControl
-              onChange={this.handlePlants}
-              value={this.state.plants[i-1].myPlant.name}
-              componentClass="textarea"
-              className="name"
-              id={(i-1).toString()}
-            />
-            <h4>Sowing distance</h4>
-            <FormControl
-              onChange={this.handlePlants}
-              value={this.state.plants[i-1].myPlant.sowing}
-              componentClass="textarea"
-              className="sowing"
-              id={(i-1).toString()}
-            />
-            <h4>Days to Maturation</h4>
-            <FormControl
-              onChange={this.handlePlants}
-              value={this.state.plants[i-1].myPlant.maturation}
-              componentClass="textarea"
-              className="maturation"
-              id={(i-1).toString()}
-            />
-            </FormGroup>
+          ? <div key={`plants${i}`}>
+              <h4>Name</h4>
+              <FormGroup key={`name${i}`}>
+                <FormControl
+                  onChange={this.handlePlants}
+                  value={this.state.plants[i-1].myPlant.name}
+                 componentClass="textarea"
+                  className="name"
+                  id={(i-1).toString()}
+                 />
+              </FormGroup>
+              <h4>Sowing distance</h4>
+              <FormGroup key={`sowing${i}`}>
+                <FormControl
+                  onChange={this.handlePlants}
+                  value={this.state.plants[i-1].myPlant.sowing}
+                  componentClass="textarea"
+                  className="sowing"
+                  id={(i-1).toString()}
+                />
+              </FormGroup>
+              <h4>Days to Maturation</h4>
+              <FormGroup key={`maturation${i}`}>
+                <FormControl
+                  onChange={this.handlePlants}
+                  value={this.state.plants[i-1].myPlant.maturation}
+                  componentClass="textarea"
+                  className="maturation"
+                  id={(i-1).toString()}
+                />
+              </FormGroup>
+            </div>
           : <LinkContainer
                 key="plant"
                 to={`/garden/addplant/${this.props.match.params.id}`}>
@@ -209,7 +213,7 @@ export default class Beds extends Component {
               bsSize="large"
               isLoading={this.state.isDeleting}
               onClick={this.handleDelete}
-              text="Delete"
+              text="Delete Bed"
               loadingText="Deleting…"
             />
           </form>}
