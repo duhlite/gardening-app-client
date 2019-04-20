@@ -51,12 +51,17 @@ export default class Home extends Component {
     )
   }
 
-  setDateSelect = (date) => {
-      let year = (parseInt(date) - 3);
-      while ((parseInt(date)-3) < (parseInt(date)+20)) {
-      year ++;
-      <option value={year}>{year}</option>;
+  setDateSelect(date) {
+    const menu = [];
+    for(let x = (parseInt(date)-3);x<=(parseInt(date)+10);x++){
+      menu.push(<option value={x.toString()} key={x}>{x}</option>);
     }
+    return menu;
+  }
+
+  dateChange = event => {
+    console.log(event.target.value);
+    this.setState({year: event.target.value})
   }
 
   renderGardenBed(garden) {
@@ -108,7 +113,7 @@ export default class Home extends Component {
         <PageHeader>Your Beds</PageHeader>
         <h4>Planting Year: {this.state.year} </h4>
         <h5>Change Year:</h5>
-        <FormControl componentClass="select">
+        <FormControl componentClass="select" onChange={this.dateChange}>
         {this.setDateSelect(this.state.year)}
         </FormControl>
         <ListGroup>
