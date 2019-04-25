@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { API, Storage } from "aws-amplify";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { API } from "aws-amplify";
+import { FormGroup, FormControl } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { s3Upload } from "../libs/awsLib";
-import config from "../config";
 import "./Beds.css";
 
 export default class Beds extends Component {

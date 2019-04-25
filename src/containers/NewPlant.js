@@ -3,7 +3,6 @@ import { API } from "aws-amplify";
 import { FormGroup, FormControl, DropdownButton, MenuItem } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import vegBase from "../Vegetable";
-import config from "../config";
 
 export default class NewPlant extends Component {
     constructor(props) {
@@ -82,6 +81,7 @@ export default class NewPlant extends Component {
         return (
             <div className="plant">
                 <form onSubmit={this.handleSubmit}>
+                    <h4>Plant Name</h4>
                     <FormGroup controlId="name">
                         <FormControl
                             onChange={this.handleChange}
@@ -89,6 +89,7 @@ export default class NewPlant extends Component {
                             componentClass="textarea"
                         />
                     </FormGroup>
+                    <h4>Sowing Distance</h4>
                     <FormGroup controlId="sowing">
                         <FormControl
                             onChange={this.handleChange}
@@ -96,6 +97,7 @@ export default class NewPlant extends Component {
                             componentClass="textarea"
                         />
                     </FormGroup>
+                    <h4>Days to Maturation</h4>
                     <FormGroup controlId="maturation">
                         <FormControl
                             onChange={this.handleChange}
@@ -103,6 +105,7 @@ export default class NewPlant extends Component {
                             componentClass="textarea"
                         />
                     </FormGroup>
+                    <h4>Planting Year</h4>
                     <FormGroup controlId="year">
                         <FormControl
                             onChange={this.handleChange}

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 import "./NewBed.css";
 
@@ -67,6 +66,7 @@ export default class NewBed extends Component {
     return (
       <div className="NewBed">
         <form onSubmit={this.handleSubmit}>
+          <h4>Garden Bed Name</h4>
           <FormGroup controlId="name">
             <FormControl
               onChange={this.handleChange}
@@ -74,6 +74,7 @@ export default class NewBed extends Component {
               componentClass="textarea"
             />
           </FormGroup>
+          <h4>Bed Length</h4>
           <FormGroup controlId="lengthDimension">
             <FormControl
               onChange={this.handleChange}
@@ -81,6 +82,7 @@ export default class NewBed extends Component {
               componentClass="textarea"
             />
           </FormGroup>
+          <h4>Bed Width</h4>
           <FormGroup controlId="widthDimension">
             <FormControl
               onChange={this.handleChange}

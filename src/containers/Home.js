@@ -3,6 +3,7 @@ import { API } from "aws-amplify";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { PageHeader, ListGroup, ListGroupItem, FormControl } from "react-bootstrap";
+import vegBase from "../Vegetable";
 import "./Home.css";
 
 export default class Home extends Component {
@@ -12,7 +13,8 @@ export default class Home extends Component {
     this.state = {
       isLoading: true,
       garden: [],
-      year: ""
+      year: "",
+      display: false
     };
   }
 
@@ -23,7 +25,6 @@ export default class Home extends Component {
 
     try {
       const garden = await this.garden();
-      console.log([{}].concat(garden));
       this.setState({ garden });
     } catch (e) {
       alert(e);
@@ -42,13 +43,44 @@ export default class Home extends Component {
     this.setState({year: d.getFullYear()});
   }
 
+  getIdea = event => {
+    let g = this.state.garden;
+    this.makeRecommend(g);
+    this.setState({display: true})
+  }
+
   getPlants (garden) {
     return garden.plants.map(
       (plant, i) =>
         plant.myPlant.year === this.state.year.toString()
           ? <div key={i} >{plant.myPlant.name}</div>
-          : <div key={i}></div>
+          : null
     )
+  }
+
+  makeRecommend (garden) {
+    const rec = [];
+    for(let x of garden) {
+      let t = [];
+      for(let y of x.plants) {
+        t.push(y.myPlant.year === this.state.year.toString())
+      }
+      if(!t.includes(true)) {
+        let plant = x.plants.find(y => y.myPlant.year === (this.state.year-1).toString());
+        let id = vegBase.find(y => y.speciesId.toString() === plant.myPlant.speciesId);
+        if(id.rotation === 0){
+          rec.push({name: x.name, plants: x.speciesName})
+        } else if(id.rotation === 5) {
+          let list = vegBase.filter(x => x.rotation === 1);
+          rec.push({name: x.name, plants: list})
+        } else {
+          let list = vegBase.filter(x => x.rotation === (id.rotation+1));
+          rec.push({name: x.name, plants: list})
+        }
+      }
+    }
+    this.setState({rec: rec});
+    console.log(rec);
   }
 
   setDateSelect(date) {
@@ -60,8 +92,22 @@ export default class Home extends Component {
   }
 
   dateChange = event => {
-    console.log(event.target.value);
     this.setState({year: event.target.value})
+  }
+
+  renderRec(rec) {
+    return rec.map(
+      (x) =>
+      <div key={x.name} className="rec-body">
+        <h4 className="rec-title">{x.name}</h4>
+        <ul>
+        {x.plants.map(
+          (x) =>
+          <li key={x.species}>{x.species}</li>
+        )}
+        </ul>
+      </div>
+    )
   }
 
   renderGardenBed(garden) {
@@ -80,10 +126,11 @@ export default class Home extends Component {
           : <LinkContainer
               key="new"
               to="/garden/new"
+              className="bedlink"
             >
               <ListGroupItem>
                 <h4>
-                  <b>{"\uFF0B"}</b> Create a new garden bed
+                  <b>{"\uFF0B"}</b> New garden bed
                 </h4>
               </ListGroupItem>
             </LinkContainer>
@@ -109,16 +156,27 @@ export default class Home extends Component {
 
   renderBeds() {
     return (
-      <div className="gardenbeds">
+      <div className="container">
         <PageHeader>Your Beds</PageHeader>
         <h4>Planting Year: {this.state.year} </h4>
-        <h5>Change Year:</h5>
-        <FormControl componentClass="select" onChange={this.dateChange}>
-        {this.setDateSelect(this.state.year)}
-        </FormControl>
-        <ListGroup>
+        <div id="year">
+          <h5>Change Year:</h5>
+          <FormControl 
+            componentClass="select" 
+            onChange={this.dateChange}
+            id="year-select"
+            value={this.state.year}
+          >
+            {this.setDateSelect(this.state.year)}
+          </FormControl>
+        </div>
+        <ListGroup id="beds">
           {!this.state.isLoading && this.renderGardenBed(this.state.garden)}
         </ListGroup>
+        <button onClick={this.getIdea}>Recommend Plants</button>
+        <div className="rec-holder">
+          {this.state.display && this.renderRec(this.state.rec)}
+        </div>
       </div>
     );
   }
