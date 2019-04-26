@@ -52,6 +52,37 @@ export default class Beds extends Component {
     return API.del("dev-garden-api", `/garden/${this.props.match.params.id}`);
   }
 
+  deletePlant = async event => {
+    event.preventDefault();
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this plant?"
+    );
+    if (!confirmed) {
+      return;
+    }
+    this.setState({ isDeletingPlant: true });
+    let p = this.state.plants
+    for(let x of p) {
+      if(x.myPlant.name === event.target.id) {
+        let remove = p.splice(p.indexOf(x),1);
+        this.setState({plants: remove})
+      }
+    }
+    try {
+
+      await this.saveBed({
+        name: this.state.name,
+        lengthDimension: this.state.bedLength,
+        widthDimension: this.state.bedWidth,
+        plants: this.state.plants
+      });
+      this.props.history.push("/");
+    } catch (e) {
+      alert(e);
+      this.setState({ isDeletingPlant: false });
+    }
+  }
+
   validateForm() {
     return this.state.name.length > 0;
   }
@@ -137,7 +168,7 @@ export default class Beds extends Component {
                   id={(i-1).toString()}
                  />
               </FormGroup>
-              <h4>Sowing distance</h4>
+              <h4>Sowing distance (inches)</h4>
               <FormGroup key={`sowing${i}`}>
                 <FormControl
                   onChange={this.handlePlants}
@@ -157,6 +188,16 @@ export default class Beds extends Component {
                   id={(i-1).toString()}
                 />
               </FormGroup>
+              <LoaderButton
+                block
+                bsStyle="danger"
+                bsSize="small"
+                isLoading={this.state.isDeletingPlant}
+                onClick={this.deletePlant}
+                text="Delete Plant"
+                loadingText="Deleting…"
+                id={plant.myPlant.name}
+              />
             </div>
           : <LinkContainer
                 key="plant"
