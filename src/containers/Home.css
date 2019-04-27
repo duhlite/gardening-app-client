@@ -22,40 +22,102 @@
 .Home .container h4 {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .Home .container p {
   color: #666;
 }
 
-#year {
+.container {
+  grid-area: content;
+  padding-left: 0;
+  display: grid;
+  height: 87vh;
+  width: 100vw;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  grid-template-areas: 
+    ". title ."
+    "date date date"
+    "bed bed bed"
+    ". button ."
+    "recommend recommend recommend";
+}
+
+.page-header {
+  grid-area: title;
+  text-align: center;
+}
+
+.datebar {
+  margin: 2rem;
+  grid-area: date;
+  grid-column: 1 / -1;
   display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#year {
+  grid-area: date;
+  grid-column-start: 2;
 }
 
 #year-select {
-  width: 30rem;
+  width: 15rem;
   margin-left: 1rem;
+}
+
+#newbed {
+  grid-area: date;
+  grid-column-start: 3;
+  width: 20rem;
+  background-color: #FEF2C1;
 }
 
 .Home .bedlink {
   margin: 1rem;
+  width: 20rem;
+  background-color: #D0E6AE;
+}
+
+span {
+  display: block;
 }
 
 #beds {
+  grid-area: bed;
   display: flex;
+  text-align: center;
+}
+
+#recButton {
+  grid-area: button;
+  background-color: #FEF2C1;
+  margin-bottom: 2rem;
 }
 
 .rec-holder {
+  grid-area: recommend;
   display: flex;
+}
+
+.rec-title {
+  text-align: center;
 }
 
 .rec-body {
   height: 20vh;
   border: 1px solid black;
-  overflow: scroll;
   margin: 1rem;
   padding: 5px;
+  background-color: #E6E1AE;
+}
+
+.rec-scroll {
+  height: 12vh;
+  overflow: scroll;
 }
 
 ul {

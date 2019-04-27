@@ -75,6 +75,9 @@ class App extends Component {
           </Navbar.Collapse>
         </Navbar>
         <Routes childProps={childProps} />
+        <div className="footer">
+              Made by Travis Mingalone
+        </div>
       </div>
     );
   }

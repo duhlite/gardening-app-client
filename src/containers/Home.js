@@ -53,7 +53,7 @@ export default class Home extends Component {
     return garden.plants.map(
       (plant, i) =>
         plant.myPlant.year === this.state.year.toString()
-          ? <div key={i} >{plant.myPlant.name}</div>
+          ? <span key={i} >{plant.myPlant.name}</span>
           : null
     )
   }
@@ -100,38 +100,28 @@ export default class Home extends Component {
       (x) =>
       <div key={x.name} className="rec-body">
         <h4 className="rec-title">{x.name}</h4>
-        <ul>
-        {x.plants.map(
-          (x) =>
-          <li key={x.species}>{x.species}</li>
-        )}
-        </ul>
+        <div className="rec-scroll">
+         <ul>
+         {x.plants.map(
+           (x) =>
+           <li key={x.species}>{x.species}</li>
+         )}
+         </ul>
+        </div>
       </div>
     )
   }
 
   renderGardenBed(garden) {
-    return [{}].concat(garden).map(
+    return garden.map(
       (garden, i) =>
-        i !== 0
-          ? <LinkContainer
+            <LinkContainer
               key={garden.bedId}
               to={`/garden/${garden.bedId}`}
               className="bedlink"
             >
               <ListGroupItem header={garden.name}>
               {this.getPlants(garden)}
-              </ListGroupItem>
-            </LinkContainer>
-          : <LinkContainer
-              key="new"
-              to="/garden/new"
-              className="bedlink"
-            >
-              <ListGroupItem>
-                <h4>
-                  <b>{"\uFF0B"}</b> New garden bed
-                </h4>
               </ListGroupItem>
             </LinkContainer>
     );
@@ -158,22 +148,35 @@ export default class Home extends Component {
     return (
       <div className="container">
         <PageHeader>Your Beds</PageHeader>
-        <h4>Planting Year: {this.state.year} </h4>
-        <div id="year">
-          <h5>Change Year:</h5>
-          <FormControl 
-            componentClass="select" 
-            onChange={this.dateChange}
-            id="year-select"
-            value={this.state.year}
+        <div className="datebar">
+          <h4>Planting Year: {this.state.year} </h4>
+          <div id="year">
+            <h5>Change Year:</h5>
+            <FormControl 
+              componentClass="select" 
+              onChange={this.dateChange}
+              id="year-select"
+              value={this.state.year}
+            >
+              {this.setDateSelect(this.state.year)}
+            </FormControl>
+          </div>
+          <LinkContainer
+            key="new"
+            to="/garden/new"
+            id="newbed"
           >
-            {this.setDateSelect(this.state.year)}
-          </FormControl>
+            <ListGroupItem>
+              <h4>
+                <b>{"\uFF0B"}</b> New garden bed
+              </h4>
+            </ListGroupItem>
+          </LinkContainer>
         </div>
         <ListGroup id="beds">
           {!this.state.isLoading && this.renderGardenBed(this.state.garden)}
         </ListGroup>
-        <button onClick={this.getIdea}>Recommend Plants</button>
+        <button onClick={this.getIdea} id="recButton">Recommend Plants</button>
         <div className="rec-holder">
           {this.state.display && this.renderRec(this.state.rec)}
         </div>
