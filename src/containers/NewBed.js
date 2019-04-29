@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import { FormGroup, FormControl } from "react-bootstrap";
+import { FormGroup, FormControl, PageHeader } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./NewBed.css";
@@ -65,6 +65,7 @@ export default class NewBed extends Component {
   render() {
     return (
       <div className="NewBed">
+        <PageHeader>New Bed</PageHeader>
         <form onSubmit={this.handleSubmit}>
           <h4>Garden Bed Name</h4>
           <FormGroup controlId="name">
@@ -99,6 +100,7 @@ export default class NewBed extends Component {
             isLoading={this.state.isLoading}
             text="Create"
             loadingText="Creating…"
+            id="new-button"
           />
         </form>
       </div>

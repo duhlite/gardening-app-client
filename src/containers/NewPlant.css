@@ -1,0 +1,18 @@
+.plant {
+    grid-area: content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.plant ul {
+    height: 20rem;
+    overflow: scroll;
+}
+
+.create-plant {
+    background-color: #D0E6AE;
+    border-color: #D0E6AE;
+    color: black;
+}

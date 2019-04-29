@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import { FormGroup, FormControl } from "react-bootstrap";
+import { FormGroup, FormControl, PageHeader } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -157,104 +157,132 @@ export default class Beds extends Component {
     const bedPlants = [{}].concat(this.state.plants).map(
       (plant, i) =>
         i !== 0
-          ? <div key={`plants${i}`}>
-              <h4>Name</h4>
-              <FormGroup key={`name${i}`}>
-                <FormControl
-                  onChange={this.handlePlants}
-                  value={this.state.plants[i-1].myPlant.name}
-                 componentClass="textarea"
-                  className="name"
-                  id={(i-1).toString()}
-                 />
-              </FormGroup>
-              <h4>Sowing distance (inches)</h4>
-              <FormGroup key={`sowing${i}`}>
-                <FormControl
-                  onChange={this.handlePlants}
-                  value={this.state.plants[i-1].myPlant.sowing}
-                  componentClass="textarea"
-                  className="sowing"
-                  id={(i-1).toString()}
+          ? <div key={`plants${i}`} className="plant-body">
+              <div className="plant-control">
+                <h4>Name</h4>
+                <FormGroup key={`name${i}`}>
+                  <FormControl
+                    onChange={this.handlePlants}
+                    value={this.state.plants[i-1].myPlant.name}
+                   componentClass="textarea"
+                    className="name"
+                    id={(i-1).toString()}
+                   />
+                </FormGroup>
+              </div>
+              <div className="plant-control">
+                <h4>Sowing distance (inches)</h4>
+                <FormGroup key={`sowing${i}`}>
+                  <FormControl
+                    onChange={this.handlePlants}
+                    value={this.state.plants[i-1].myPlant.sowing}
+                    componentClass="textarea"
+                    className="sowing"
+                    id={(i-1).toString()}
+                  />
+                </FormGroup>
+              </div>
+              <div className="plant-control">
+                <h4>Days to Maturation</h4>
+                <FormGroup key={`maturation${i}`}>
+                  <FormControl
+                    onChange={this.handlePlants}
+                    value={this.state.plants[i-1].myPlant.maturation}
+                    componentClass="textarea"
+                    className="maturation"
+                    id={(i-1).toString()}
+                  />
+                </FormGroup>
+              </div>
+              <div className="plant-control">
+                <LoaderButton
+                  block
+                  bsStyle="danger"
+                  bsSize="small"
+                  isLoading={this.state.isDeletingPlant}
+                  onClick={this.deletePlant}
+                  text="Delete Plant"
+                  loadingText="Deleting…"
+                  id={plant.myPlant.name}
+                  className="plant-delete"
                 />
-              </FormGroup>
-              <h4>Days to Maturation</h4>
-              <FormGroup key={`maturation${i}`}>
-                <FormControl
-                  onChange={this.handlePlants}
-                  value={this.state.plants[i-1].myPlant.maturation}
-                  componentClass="textarea"
-                  className="maturation"
-                  id={(i-1).toString()}
-                />
-              </FormGroup>
-              <LoaderButton
-                block
-                bsStyle="danger"
-                bsSize="small"
-                isLoading={this.state.isDeletingPlant}
-                onClick={this.deletePlant}
-                text="Delete Plant"
-                loadingText="Deleting…"
-                id={plant.myPlant.name}
-              />
+              </div>
             </div>
-          : <LinkContainer
-                key="plant"
-                to={`/garden/addplant/${this.props.match.params.id}`}>
-              <Button variant="primary">New Plant</Button>
-            </LinkContainer>
+          : null
 
     )
     return (
       <div className="Beds">
+        <PageHeader id="edit-title">Edit Garden Bed</PageHeader>
         {this.state.bed &&
           <form onSubmit={this.handleSubmit}>
-            <h4>Bed Name</h4>
-            <FormGroup controlId="name">
-              <FormControl
-                onChange={this.handleChange}
-                value={this.state.name}
-                componentClass="textarea"
+            <div className="bed-edit">
+              <div className="bed-control">
+                <h4>Bed Name</h4>
+                <FormGroup controlId="name" className="bed">
+                  <FormControl
+                    onChange={this.handleChange}
+                    value={this.state.name}
+                    componentClass="textarea"
+                  />
+                </FormGroup>
+              </div>
+              <div className="bed-control">
+                <h4>Bed Length (inches)</h4>
+                <FormGroup controlId="bedLength" className="bed">
+                  <FormControl
+                    onChange={this.handleChange}
+                    value={this.state.bedLength}
+                    componentClass="textarea"
+                  />
+                </FormGroup>
+              </div>
+              <div className="bed-control">
+                <h4>Bed Width (inches)</h4>
+                <FormGroup controlId="bedWidth" className="bed">
+                  <FormControl
+                    onChange={this.handleChange}
+                    value={this.state.bedWidth}
+                    componentClass="textarea"
+                  />
+                </FormGroup>
+              </div>
+            </div>
+            <div className="plant-edit">
+              <h2 className="plant-title">Plants</h2>
+              <LinkContainer
+                key="plant"
+                to={`/garden/addplant/${this.props.match.params.id}`}
+                className="plant-submit">
+                <Button variant="primary">New Plant</Button>
+              </LinkContainer>
+              <div className="plant-div">
+                {bedPlants}
+              </div>
+            </div>
+            <div className="buttons">
+              <LoaderButton
+                block
+                bsStyle="primary"
+                bsSize="large"
+                disabled={!this.validateForm()}
+                type="submit"
+                isLoading={this.state.isLoading}
+                text="Save"
+                loadingText="Saving…"
+                className="save-bed"
               />
-            </FormGroup>
-            <h4>Bed Length (inches)</h4>
-            <FormGroup controlId="bedLength">
-              <FormControl
-                onChange={this.handleChange}
-                value={this.state.bedLength}
-                componentClass="textarea"
+              <LoaderButton
+                block
+                bsStyle="danger"
+                bsSize="large"
+                isLoading={this.state.isDeleting}
+                onClick={this.handleDelete}
+                text="Delete Bed"
+                loadingText="Deleting…"
+                className="delete-bed"
               />
-            </FormGroup>
-            <h4>Bed Width (inches)</h4>
-            <FormGroup controlId="bedWidth">
-              <FormControl
-                onChange={this.handleChange}
-                value={this.state.bedWidth}
-                componentClass="textarea"
-              />
-            </FormGroup>
-            <h4>Plants</h4>
-            {bedPlants}
-            <LoaderButton
-              block
-              bsStyle="primary"
-              bsSize="large"
-              disabled={!this.validateForm()}
-              type="submit"
-              isLoading={this.state.isLoading}
-              text="Save"
-              loadingText="Saving…"
-            />
-            <LoaderButton
-              block
-              bsStyle="danger"
-              bsSize="large"
-              isLoading={this.state.isDeleting}
-              onClick={this.handleDelete}
-              text="Delete Bed"
-              loadingText="Deleting…"
-            />
+            </div>
           </form>}
       </div>
     );

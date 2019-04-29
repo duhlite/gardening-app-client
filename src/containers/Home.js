@@ -67,7 +67,10 @@ export default class Home extends Component {
       }
       if(!t.includes(true)) {
         let plant = x.plants.find(y => y.myPlant.year === (this.state.year-1).toString());
-        let id = vegBase.find(y => y.speciesId.toString() === plant.myPlant.speciesId);
+        if(plant === undefined) {
+          rec.push({name: x.name, plants: [{species:"Add a plant to the previous year to get recommendations"}]});
+        } else {
+          let id = vegBase.find(y => y.speciesId.toString() === plant.myPlant.speciesId);
         if(id.rotation === 0){
           rec.push({name: x.name, plants: x.speciesName})
         } else if(id.rotation === 5) {
@@ -77,6 +80,8 @@ export default class Home extends Component {
           let list = vegBase.filter(x => x.rotation === (id.rotation+1));
           rec.push({name: x.name, plants: list})
         }
+        }
+        
       }
     }
     this.setState({rec: rec});

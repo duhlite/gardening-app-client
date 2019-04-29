@@ -1,6 +1,8 @@
 .Home .lander {
   padding: 80px 0;
   text-align: center;
+  grid-area: content;
+  height: 89vh;
 }
 
 .Home .lander h1 {
@@ -33,7 +35,7 @@
   grid-area: content;
   padding-left: 0;
   display: grid;
-  height: 87vh;
+  height: 89vh;
   width: 100vw;
   grid-template-rows: auto;
   grid-template-columns: auto;
@@ -55,6 +57,7 @@
   grid-area: date;
   grid-column: 1 / -1;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
 }
@@ -67,6 +70,7 @@
 #year-select {
   width: 15rem;
   margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 
 #newbed {
@@ -90,6 +94,7 @@ span {
   grid-area: bed;
   display: flex;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 #recButton {
@@ -101,6 +106,8 @@ span {
 .rec-holder {
   grid-area: recommend;
   display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
 }
 
 .rec-title {
@@ -116,7 +123,7 @@ span {
 }
 
 .rec-scroll {
-  height: 12vh;
+  height: 75%;
   overflow: scroll;
 }
 

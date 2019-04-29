@@ -1,8 +1,99 @@
+.Beds {
+  grid-area: content;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "title title title"
+    "bed bed bed"
+    "plant plant plant"
+    ". submit .";
+}
+
+#edit-title {
+  grid-area: title;
+}
+
+.bed-edit {
+  grid-area: bed;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bed-control {
+  text-align: center;
+}
+
+.bed {
+  margin: 1rem;
+  flex: 1 1 calc(33% - 2rem);
+}
+
+.buttons {
+  grid-area: submit;
+}
+
+.plant-edit {
+  grid-area: plant;
+  display: flex;
+  flex-direction: column;
+}
+
+.plant-title {
+  text-align: center;
+}
+
+.plant-submit {
+  justify-content: center;
+  width: 20rem;
+  margin: auto;
+  background-color: #D0E6AE;
+}
+
+.plant-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.plant-body {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border: 1px solid #E6E1AE;
+  background-color: #FEF2C1;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.plant-control {
+  flex: 1 1 (20% - 2rem);
+}
+
+.plant-delete {
+  background-color: #E6E1AE;
+  color: black;
+  border-color: #E6E1AE;
+}
+
+.save-bed {
+  background-color: #D0E6AE;
+  border-color: #D0E6AE;
+  color: black;
+}
+
+.delete-bed {
+  background-color: #E6E1AE;
+  border-color: #E6E1AE;
+  color: black;
+}
+
 .Beds form {
   padding-bottom: 15px;
 }
 
 .Beds form textarea {
-  height: 100px;
+  height: 5rem;
   font-size: 24px;
 }

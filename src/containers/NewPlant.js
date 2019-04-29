@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
-import { FormGroup, FormControl, DropdownButton, MenuItem } from "react-bootstrap";
+import { FormGroup, FormControl, DropdownButton, MenuItem, PageHeader } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import vegBase from "../Vegetable";
+import "./NewPlant.css";
 
 export default class NewPlant extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class NewPlant extends Component {
             sowing: "",
             maturation: "",
             year: "",
-            select: "Select Species"
+            select: "Select Species (Required)"
         };
     }
 
@@ -28,7 +29,7 @@ export default class NewPlant extends Component {
     }
 
     validateForm() {
-        return this.state.name.length > 0;
+        return this.state.speciesId.length > 0;
     }
 
     handleChange = event => {
@@ -80,7 +81,11 @@ export default class NewPlant extends Component {
         })
         return (
             <div className="plant">
+                <PageHeader>Add a Plant</PageHeader>
                 <form onSubmit={this.handleSubmit}>
+                    <DropdownButton id="species" title={this.state.select} onSelect={this.handleSelect}>
+                        {vegToggle}
+                    </DropdownButton>
                     <h4>Plant Name</h4>
                     <FormGroup controlId="name">
                         <FormControl
@@ -89,7 +94,7 @@ export default class NewPlant extends Component {
                             componentClass="textarea"
                         />
                     </FormGroup>
-                    <h4>Sowing Distance</h4>
+                    <h4>Sowing Distance (inches)</h4>
                     <FormGroup controlId="sowing">
                         <FormControl
                             onChange={this.handleChange}
@@ -113,9 +118,6 @@ export default class NewPlant extends Component {
                             componentClass="textarea"
                         />
                     </FormGroup>
-                    <DropdownButton id="species" title={this.state.select} onSelect={this.handleSelect}>
-                        {vegToggle}
-                    </DropdownButton>
                     <LoaderButton
                       block
                       bsStyle="primary"
@@ -125,6 +127,7 @@ export default class NewPlant extends Component {
                       isLoading={this.state.isLoading}
                       text="Create"
                       loadingText="Creating…"
+                      className="create-plant"
                     />
                 </form>
             </div>
