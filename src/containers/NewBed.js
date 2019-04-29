@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { API } from "aws-amplify";
 import { FormGroup, FormControl, PageHeader } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import config from "../config";
 import "./NewBed.css";
 
 export default class NewBed extends Component {
@@ -41,11 +40,6 @@ export default class NewBed extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-
-    if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
-      return;
-    }
 
     this.setState({ isLoading: true });
 
