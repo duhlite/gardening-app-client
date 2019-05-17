@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { PageHeader, ListGroup, ListGroupItem, FormControl } from "react-bootstrap";
@@ -58,6 +58,18 @@ export default class Home extends Component {
     )
   }
 
+  handleSubmit = async event => {
+    event.preventDefault();
+
+    try {
+      await Auth.signIn(process.env.REACT_APP_DEMO_ID , process.env.REACT_APP_DEMO_PASSWORD);
+      this.props.userHasAuthenticated(true);
+      window.location.reload();
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
   makeRecommend (garden) {
     const rec = [];
     for(let x of garden) {
@@ -85,7 +97,6 @@ export default class Home extends Component {
       }
     }
     this.setState({rec: rec});
-    console.log(rec);
   }
 
   setDateSelect(date) {
@@ -144,6 +155,16 @@ export default class Home extends Component {
           <Link to="/signup" className="btn btn-success btn-lg">
             Signup
           </Link>
+        </div>
+        <div>
+          Want to try it out first?<br />
+          <button 
+            className="btn btn-info btn-lg" 
+            onClick={this.handleSubmit}
+            id="demo"
+          >
+            Demo
+          </button>
         </div>
       </div>
     );

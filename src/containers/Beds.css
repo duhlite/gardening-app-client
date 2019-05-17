@@ -5,13 +5,22 @@
   grid-template-rows: auto;
   grid-template-areas: 
     "title title title"
-    "bed bed bed"
-    "plant plant plant"
-    ". submit .";
+    "form form form";
 }
 
 #edit-title {
   grid-area: title;
+}
+
+.bed-form {
+  grid-area: form;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "bed bed bed"
+    "plant plant plant"
+    ". submit .";
 }
 
 .bed-edit {

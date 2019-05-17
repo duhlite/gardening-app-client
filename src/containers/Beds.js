@@ -215,7 +215,7 @@ export default class Beds extends Component {
       <div className="Beds">
         <PageHeader id="edit-title">Edit Garden Bed</PageHeader>
         {this.state.bed &&
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="bed-form">
             <div className="bed-edit">
               <div className="bed-control">
                 <h4>Bed Name</h4>
