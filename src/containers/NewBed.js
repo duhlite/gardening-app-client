@@ -69,7 +69,7 @@ export default class NewBed extends Component {
               componentClass="textarea"
             />
           </FormGroup>
-          <h4>Bed Length</h4>
+          <h4>Bed Length (inches)</h4>
           <FormGroup controlId="lengthDimension">
             <FormControl
               onChange={this.handleChange}
@@ -77,7 +77,7 @@ export default class NewBed extends Component {
               componentClass="textarea"
             />
           </FormGroup>
-          <h4>Bed Width</h4>
+          <h4>Bed Width (inches)</h4>
           <FormGroup controlId="widthDimension">
             <FormControl
               onChange={this.handleChange}

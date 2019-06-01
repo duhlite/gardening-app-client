@@ -94,6 +94,8 @@ export default class Home extends Component {
         }
         }
         
+      } else {
+        rec.push({name: x.name, plants: [{species:"You have plants growing this year! Change year to next year to get recommendations!"}]})
       }
     }
     this.setState({rec: rec});
@@ -114,7 +116,7 @@ export default class Home extends Component {
   renderRec(rec) {
     return rec.map(
       (x) =>
-      <div key={x.name} className="rec-body">
+      <div key={x.name} className="rec-body col-md-4 col-xs-12 text-center">
         <h4 className="rec-title">{x.name}</h4>
         <div className="rec-scroll">
          <ul>
@@ -134,7 +136,7 @@ export default class Home extends Component {
             <LinkContainer
               key={garden.bedId}
               to={`/garden/${garden.bedId}`}
-              className="bedlink"
+              className="bedlink col-md-4 col-xs-12"
             >
               <ListGroupItem header={garden.name}>
               {this.getPlants(garden)}
@@ -173,10 +175,12 @@ export default class Home extends Component {
   renderBeds() {
     return (
       <div className="container">
-        <PageHeader>Your Beds</PageHeader>
-        <div className="datebar">
-          <h4>Planting Year: {this.state.year} </h4>
-          <div id="year">
+        <div className="row">
+          <PageHeader className="text-center">Your Beds</PageHeader>
+        </div>
+        <div className="datebar row text-center">
+          <h4 className="col-md-4 col-xs-12">Planting Year: {this.state.year} </h4>
+          <div id="year" className="col-md-4 col-xs-12">
             <h5>Change Year:</h5>
             <FormControl 
               componentClass="select" 
@@ -187,23 +191,27 @@ export default class Home extends Component {
               {this.setDateSelect(this.state.year)}
             </FormControl>
           </div>
-          <LinkContainer
-            key="new"
-            to="/garden/new"
-            id="newbed"
-          >
-            <ListGroupItem>
-              <h4>
-                <b>{"\uFF0B"}</b> New garden bed
-              </h4>
-            </ListGroupItem>
-          </LinkContainer>
+          <div className="col-md-4 col-xs-12">
+            <LinkContainer
+              key="new"
+              to="/garden/new"
+              id="newbed"
+            >
+              <ListGroupItem>
+                <h4>
+                  <b>{"\uFF0B"}</b> New garden bed
+                </h4>
+              </ListGroupItem>
+            </LinkContainer>
+          </div>
         </div>
-        <ListGroup id="beds">
+        <ListGroup id="beds" className="row text-center">
           {!this.state.isLoading && this.renderGardenBed(this.state.garden)}
         </ListGroup>
-        <button onClick={this.getIdea} id="recButton">Recommend Plants</button>
-        <div className="rec-holder">
+        <div className="row text-center">
+          <button onClick={this.getIdea} id="recButton">Recommend Plants</button>
+        </div>
+        <div className="rec-holder row">
           {this.state.display && this.renderRec(this.state.rec)}
         </div>
       </div>
