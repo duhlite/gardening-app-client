@@ -1,15 +1,16 @@
 .NewBed {
-  height: 89vh;
-  grid-area: content;
+  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  padding-left: 15px;
 }
 
 .NewBed form {
   padding-bottom: 15px;
   padding-left: 15px;
+  max-width: 75vw;
 }
 
 .NewBed form textarea {
@@ -22,4 +23,10 @@
   color: black;
   border: 1px solid #E6E1AE;
   margin-bottom: 2vh;
+}
+
+#new-button:hover {
+  background-color: #ACF2B2;
+  border-color: #ACF2B2;
+  color: black;
 }

@@ -69,7 +69,6 @@ export default class Beds extends Component {
       }
     }
     try {
-
       await this.saveBed({
         name: this.state.name,
         lengthDimension: this.state.bedLength,
@@ -102,13 +101,10 @@ export default class Beds extends Component {
   }
 
   handleSubmit = async event => {
-
     event.preventDefault();
-
     this.setState({ isLoading: true });
 
     try {
-
       await this.saveBed({
         name: this.state.name,
         lengthDimension: this.state.bedLength,
@@ -151,6 +147,14 @@ export default class Beds extends Component {
     plant[id] = event.target.value;
     plants[event.target.id].myPlant = plant;
     this.setState( (state) => ({plants: plants}))
+  }
+
+  renderIntro() {
+    return (
+      <div className="intro text-center">
+        <p>Use the button above to add a plant to this garden bed!</p>
+      </div>
+    )
   }
 
   render() {
@@ -212,12 +216,14 @@ export default class Beds extends Component {
 
     )
     return (
-      <div className="Beds">
-        <PageHeader id="edit-title">Edit Garden Bed</PageHeader>
+      <div className="Beds container">
+        <div className="row text-center">
+          <PageHeader id="edit-title">Edit Garden Bed</PageHeader>
+        </div>
         {this.state.bed &&
           <form onSubmit={this.handleSubmit} className="bed-form">
-            <div className="bed-edit">
-              <div className="bed-control">
+            <div className="bed-edit row">
+              <div className="bed-control col-md-4 col-xs-12">
                 <h4>Bed Name</h4>
                 <FormGroup controlId="name" className="bed">
                   <FormControl
@@ -227,7 +233,7 @@ export default class Beds extends Component {
                   />
                 </FormGroup>
               </div>
-              <div className="bed-control">
+              <div className="bed-control col-md-4 col-xs-12">
                 <h4>Bed Length (inches)</h4>
                 <FormGroup controlId="bedLength" className="bed">
                   <FormControl
@@ -237,7 +243,7 @@ export default class Beds extends Component {
                   />
                 </FormGroup>
               </div>
-              <div className="bed-control">
+              <div className="bed-control col-md-4 col-xs-12">
                 <h4>Bed Width (inches)</h4>
                 <FormGroup controlId="bedWidth" className="bed">
                   <FormControl
@@ -257,31 +263,33 @@ export default class Beds extends Component {
                 <Button variant="primary">New Plant</Button>
               </LinkContainer>
               <div className="plant-div">
-                {bedPlants}
+                {this.state.plants.length > 0 ? bedPlants : this.renderIntro()}
               </div>
             </div>
-            <div className="buttons">
-              <LoaderButton
-                block
-                bsStyle="primary"
-                bsSize="large"
-                disabled={!this.validateForm()}
-                type="submit"
-                isLoading={this.state.isLoading}
-                text="Save"
-                loadingText="Saving…"
-                className="save-bed"
-              />
-              <LoaderButton
-                block
-                bsStyle="danger"
-                bsSize="large"
-                isLoading={this.state.isDeleting}
-                onClick={this.handleDelete}
-                text="Delete Bed"
-                loadingText="Deleting…"
-                className="delete-bed"
-              />
+            <div className="buttons container">
+              <div className="row text-center">
+                <LoaderButton
+                  block
+                  bsStyle="primary"
+                  bsSize="large"
+                  disabled={!this.validateForm()}
+                  type="submit"
+                  isLoading={this.state.isLoading}
+                  text="Save Bed"
+                  loadingText="Saving…"
+                  className="save-bed"
+                />
+                <LoaderButton
+                  block
+                  bsStyle="danger"
+                  bsSize="large"
+                  isLoading={this.state.isDeleting}
+                  onClick={this.handleDelete}
+                  text="Delete Bed"
+                  loadingText="Deleting…"
+                  className="delete-bed"
+                />
+              </div>
             </div>
           </form>}
       </div>

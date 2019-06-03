@@ -59,7 +59,7 @@ export default class NewBed extends Component {
   render() {
     return (
       <div className="NewBed">
-        <PageHeader>New Bed</PageHeader>
+        <PageHeader>New Garden Bed</PageHeader>
         <form onSubmit={this.handleSubmit}>
           <h4>Garden Bed Name</h4>
           <FormGroup controlId="name">

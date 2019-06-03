@@ -4,6 +4,7 @@
   display: grid;
   min-height: 100vh;
   width: 100vw;
+  padding-right: 0;
   grid-template-rows: auto;
   grid-template-columns: auto;
   grid-template-areas: 
@@ -22,6 +23,7 @@
   margin: 0;
   background-color: #E6E1AE;
   max-height: 8vh;
+  min-width: 100%;
 }
 
 .footer {

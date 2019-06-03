@@ -1,32 +1,8 @@
 .Beds {
   grid-area: content;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  grid-template-areas: 
-    "title title title"
-    "form form form";
-}
-
-#edit-title {
-  grid-area: title;
-}
-
-.bed-form {
-  grid-area: form;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  grid-template-areas: 
-    "bed bed bed"
-    "plant plant plant"
-    ". submit .";
-}
-
-.bed-edit {
-  grid-area: bed;
-  display: flex;
-  justify-content: space-around;
+  min-height: 100%;
+  width: 100vw;
+  padding-left: 15px;
 }
 
 .bed-control {
@@ -38,12 +14,15 @@
   flex: 1 1 calc(33% - 2rem);
 }
 
-.buttons {
-  grid-area: submit;
+.intro {
+  margin: 5vh 0;
+  padding: 5px 7px;
+  border: 4px solid #D0E6AE;
+  border-radius: 5px;
+  background-color: #FEF2C1;
 }
 
 .plant-edit {
-  grid-area: plant;
   display: flex;
   flex-direction: column;
 }
@@ -59,10 +38,17 @@
   background-color: #D0E6AE;
 }
 
+.plant-submit:hover {
+  background-color: #ACF2B2;
+  border-color: #ACF2B2;
+  color: black;
+}
+
 .plant-div {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding-bottom: 5px;
 }
 
 .plant-body {
@@ -86,15 +72,38 @@
   border-color: #E6E1AE;
 }
 
+.plant-delete:hover {
+  background-color: #FEDD8E;
+  border-color: #FEDD8E;
+  color: black;
+}
+
+.buttons {
+  max-width: 50vw;
+  
+}
+
 .save-bed {
   background-color: #D0E6AE;
   border-color: #D0E6AE;
   color: black;
 }
 
+.save-bed:hover {
+  background-color: #ACF2B2;
+  border-color: #ACF2B2;
+  color: black;
+}
+
 .delete-bed {
   background-color: #E6E1AE;
   border-color: #E6E1AE;
+  color: black;
+}
+
+.delete-bed:hover {
+  background-color: #FEDD8E;
+  border-color: #FEDD8E;
   color: black;
 }
 

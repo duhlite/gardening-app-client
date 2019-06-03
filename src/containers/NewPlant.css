@@ -1,9 +1,10 @@
 .plant {
-    grid-area: content;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    padding-left: 15px;
 }
 
 .plant ul {
@@ -15,4 +16,16 @@
     background-color: #D0E6AE;
     border-color: #D0E6AE;
     color: black;
+}
+
+.create-plant:hover {
+  background-color: #ACF2B2;
+  border-color: #ACF2B2;
+  color: black;
+}
+
+@media screen and (min-width: 900px) {
+    .plant form {
+        max-width: 75vw;
+    }
 }

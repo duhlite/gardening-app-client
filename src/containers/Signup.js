@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import {
-  HelpBlock,
-  FormGroup,
-  FormControl,
-  ControlLabel
-} from "react-bootstrap";
+  HelpBlock, FormGroup, FormControl, ControlLabel, PageHeader } from "react-bootstrap";
 import { Auth } from "aws-amplify";
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
@@ -148,6 +144,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="Signup">
+        <PageHeader className="title text-center">Sign up for GardeningToolkit</PageHeader>
         {this.state.newUser === null
           ? this.renderForm()
           : this.renderConfirmationForm()}

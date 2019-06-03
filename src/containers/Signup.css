@@ -1,13 +1,5 @@
-@media all and (min-width: 480px) {
-  .Signup {
-    padding: 60px 0;
-    height: 89vh;
-  }
-
-  .Signup form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
+form {
+  padding: 0 2vw 0 2vw;
 }
 
 .Signup form span.help-block {

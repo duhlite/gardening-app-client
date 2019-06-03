@@ -1,5 +1,4 @@
 .Home .lander {
-  height: 89vh;
   padding: 80px 0;
   text-align: center;
   grid-area: content;
@@ -66,9 +65,20 @@
   margin: 0 auto;
 }
 
+#newbed:hover {
+  background-color: #FEDD8E;
+}
+
 .bedlink {
   margin: 1rem;
   background-color: #D0E6AE;
+  margin-bottom: 0;
+}
+
+a.bedlink:hover {
+  background-color: #ACF2B2;
+  border-color: #ACF2B2;
+  color: black;
 }
 
 span {
@@ -83,9 +93,17 @@ span {
 }
 
 #recButton {
-  background-color: #FEF2C1;
+  background-color: #CFE6AE;
+  border-color: #CFE6AE;
+  color: black;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+#recButton:hover {
+  background-color: #ACF2B2;
+  border-color: #ACF2B2;
+  color: black;
 }
 
 .rec-holder {
@@ -97,7 +115,7 @@ span {
 }
 
 .rec-body {
-  height: 20vh;
+  max-height: 30vh;
   border: 1px solid black;
   margin: 1rem;
   padding: 5px;

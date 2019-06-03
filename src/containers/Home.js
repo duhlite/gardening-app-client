@@ -136,7 +136,7 @@ export default class Home extends Component {
             <LinkContainer
               key={garden.bedId}
               to={`/garden/${garden.bedId}`}
-              className="bedlink col-md-4 col-xs-12"
+              className="bedlink col-md-4 col-sm-5 col-xs-12"
             >
               <ListGroupItem header={garden.name}>
               {this.getPlants(garden)}
@@ -209,7 +209,13 @@ export default class Home extends Component {
           {!this.state.isLoading && this.renderGardenBed(this.state.garden)}
         </ListGroup>
         <div className="row text-center">
-          <button onClick={this.getIdea} id="recButton">Recommend Plants</button>
+          <button 
+            onClick={this.getIdea} 
+            id="recButton"
+            className="btn btn-primary"
+          >
+            Recommend Plants
+          </button>
         </div>
         <div className="rec-holder row">
           {this.state.display && this.renderRec(this.state.rec)}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel, PageHeader } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Login.css";
 
@@ -42,7 +42,8 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
+        <PageHeader className="title text-center">Login to GardeningToolkit</PageHeader>
+        <form onSubmit={this.handleSubmit} className="login">
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
